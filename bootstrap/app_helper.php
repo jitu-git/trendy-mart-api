@@ -40,7 +40,7 @@ if(!function_exists('get_user_info')){
 
 if(!function_exists('is_admin')) {
     function is_admin() {
-        $logged_in_user_role = get_user_info('role_id');
+        $logged_in_user_role = get_user_info('id');
         return $logged_in_user_role == 1;
     }
 }

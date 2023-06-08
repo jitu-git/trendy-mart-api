@@ -80,6 +80,7 @@
                                 <th scope="col"><input type="checkbox" id="all_bulk_action"></th>
                                 <th scope="col">#</th>
                                 <th>Name</th>
+                                <th>Parent</th>
                                 <th>status</th>
                                 <th >Action</th>
                             </tr>
@@ -90,6 +91,7 @@
                                     <td><input type="checkbox" class="bulk_action" name="bulk_ids[]" value="{{ $content->id }}"/></td>
                                     <td scope="row"> {{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }} </td>
                                     <td>{{ $content->name }}</td>
+                                    <td>{{ $content->parent->name }}</td>
                                     <td>
                                         @if($content->status == 1)
                                             <span class="badge badge-success">Active</span>

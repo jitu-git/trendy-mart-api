@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function listing(Request $request) {
         $filter_data = $request->all();
         $limit = isset($filter_data['limit']) ? $filter_data['limit'] : $this->limit;
-        $query = Category::orderBy('name');
+        $query = Category::with('parent');
 
         // add filter in records
         searching_string($query, $request->form);
@@ -72,6 +72,7 @@ class CategoryController extends Controller
     public function create() {
         $this->_data["breadcrumb"]["Create"] =  "javascript:void(0)";
         $this->_data["form"] = new CategoryForm;
+        $this->_data["categories"] = menu_parent_list();
         return view(load_view(), $this->_data);
     }
 
@@ -86,11 +87,17 @@ class CategoryController extends Controller
     public function store(Request $request) {
         $request->validate(CategoryForm::rules());
         $data = $request->all();
+        if($request->hasFile('file')) {
+            $data["image"] = upload_file("file", 'categories');
+        }
+        if($data['parent_id'] == 0) {
+            $data['parent_id'] = null;
+        }
         $store = Category::create($data);
         if($store) {
-           # $request->session()->flash('success', $this->success_response);
+           $request->session()->flash('success', $this->success_response);
         } else {
-           # $request->session()->flash('error', $this->error_response);
+           $request->session()->flash('error', $this->error_response);
         }
         return redirect()->to(route($this->routes["index"]));
     }
@@ -107,6 +114,7 @@ class CategoryController extends Controller
         $this->_data["breadcrumb"]["Update"] =  "javascript:void(0)";
         $this->_data["data"] = $category;
         $this->_data["form"] = new CategoryForm($category);
+        $this->_data["categories"] = menu_parent_list();
         return view(load_view(), $this->_data);
     }
 
@@ -123,10 +131,17 @@ class CategoryController extends Controller
         $request->validate(CategoryForm::rules());
         $data = $request->except("_token");
         $update = $category->update($data);
+        if($request->hasFile('file')) {
+            $data["image"] = upload_file("file", 'categories');
+        }
+        if($data['parent_id'] == 0) {
+            $data['parent_id'] = null;
+        }
+        
         if($update) {
-           # $request->session()->flash('success', $this->update_response);
+           $request->session()->flash('success', $this->update_response);
         } else {
-           # $request->session()->flash('error', $this->error_response);
+           $request->session()->flash('error', $this->error_response);
         }
         return redirect()->to(route($this->routes["index"]));
     }

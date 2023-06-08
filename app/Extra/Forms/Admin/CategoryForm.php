@@ -24,7 +24,7 @@ class CategoryForm extends BuildForm
     {
         $rules = [
             "name" => "required",
-         #   "icon" => "mimes:jpg,jpeg,png|max:10240",
+            "image" => "mimes:jpg,jpeg,png|max:10240",
         ];
         if (!$id) {
            # $rules['icon'] = "required|mimes:jpg,jpeg,png|max:10240";

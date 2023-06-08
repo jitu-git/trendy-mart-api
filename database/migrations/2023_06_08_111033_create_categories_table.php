@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1)->comment("1-active, 2-inactive");
             $table->softDeletes();
             $table->timestamps();

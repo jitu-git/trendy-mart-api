@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Model\Schema\Events;
-
 trait MassAction
 {
 

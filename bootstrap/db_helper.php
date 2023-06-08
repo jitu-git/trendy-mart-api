@@ -101,7 +101,7 @@ if(!function_exists("menu_parent_list" )){
      * @return mixed
      */
     function menu_parent_list() {
-        return \App\Model\Menu::MenuParentList();
+        return \App\Models\Category::CategoryList();
     }
 }
 
