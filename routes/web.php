@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Route::get('/', function () {
 });
 
 require __DIR__.'/auth.php';
+Route::get('web-admin', [DashboardController::class, 'index'])->name('admin.dashboard');

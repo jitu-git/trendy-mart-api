@@ -17,6 +17,11 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
+        if($request->get("from" === 'admin')) {
+            $request->session()->regenerate();
+            return redirect('admin.dashboard');
+
+        }
         $request->user()->tokens()->delete();
         $token = $request->user()->createToken($request->user()->name);
 
