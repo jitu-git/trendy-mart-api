@@ -23,4 +23,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('categories', [ProductController::class, 'categories']);
+    Route::get('filters', [ProductController::class, 'filterData']);
 });

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\Size;
 
 class ProductController extends Controller {
 
@@ -16,6 +19,22 @@ class ProductController extends Controller {
       'status' => true,
       'message' => 'Categories list',
       'data' => $categories
+    ]);
+  }
+
+  public function filterData() {
+    $sizes = Size::active()->get();
+    $colors = Color::active()->get();
+    $brands = Brand::active()->get();
+
+    return response()->json([
+      'status' => true,
+      'message' => 'Categories list',
+      'data' => [
+        'sizes' => $sizes, 
+        'colors' => $colors, 
+        'brands' => $brands
+      ]
     ]);
   }
 

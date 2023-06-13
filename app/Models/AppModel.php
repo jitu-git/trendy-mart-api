@@ -10,4 +10,15 @@ use App\Traits\MassAction;
 class AppModel extends Model
 {
     use HasFactory, MassAction;
+
+     /**
+     * Scope a query to only include only active .
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('status', 1);
+    }
 }
