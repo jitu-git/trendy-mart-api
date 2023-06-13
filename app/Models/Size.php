@@ -9,8 +9,4 @@ class Size extends AppModel
 {
     protected $fillable = ['title', 'short_title', 'status'];
 
-    public static $rules = [
-        'title' => 'required',
-        'short_title' => 'required',
-    ];
 }
