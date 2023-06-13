@@ -42,6 +42,9 @@ Route::prefix('users')->middleware('auth')->namespace('Users')->name('users.')->
 Route::prefix('products')->middleware('auth')->namespace('Products')->name('products.')->group(function () {
     $settings_modules = [
         'category'     => 'CategoryController',
+        'color'     => 'ColorController',
+        'size'     => 'SizeController',
+        'brand'     => 'BrandController',
     ];
     #Route::get('/', 'IndexController@index')->name('index');
     

@@ -36,12 +36,10 @@
                             {{ Form::model($search, ['class'=>'form-inline','method' =>'get', 'id' => 'search_form']) }}
                             <input type="hidden" id="perpage" name="perpage" value="{{ $limit }}">
                             <input type="hidden" id="export" name="export">
-                            <div class="form-group mb-2 mr-sm-2">
-                                {{ Form::select('form[like][district_id]', district_list(), null, ['class' => 'form-control', "placeholder" => "Choose District"]) }}
-                            </div>
+                            
                             
                             <div class="form-group mb-2 mr-sm-2">
-                                {{ Form::text('form[like][name]', null, ['class' => 'form-control', "placeholder" => "Name"]) }}
+                                {{ Form::text('form[like][color_name]', null, ['class' => 'form-control', "placeholder" => "Name"]) }}
                             </div>
                             {{Form::submit('Submit', ['class' => 'btn btn-primary'])}} &nbsp;&nbsp;
                             <a href="{{ route($routes['index']) }}" class="btn btn-warning" >Reset</a> &nbsp;
@@ -81,10 +79,8 @@
                             <tr>
                                 <th scope="col"><input type="checkbox" id="all_bulk_action"></th>
                                 <th scope="col">#</th>
-                                <th>District</th>
                                 <th>Name</th>
-                                <th>Hindi Name</th>
-                                <th>Email</th>
+                                <th>Code</th>
                                 <th>status</th>
                                 <th >Action</th>
                             </tr>
@@ -94,10 +90,8 @@
                                 <tr>
                                     <td><input type="checkbox" class="bulk_action" name="bulk_ids[]" value="{{ $content->id }}"/></td>
                                     <td scope="row"> {{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }} </td>
-                                    <td>{{ $content->district->city_name }}</td>
-                                    <td>{{ $content->name }}</td>
-                                    <td>{{ $content->hi_name }}</td>
-                                    <td>{{ $content->email }}</td>
+                                    <td>{{ $content->color_name }}</td>
+                                    <td>{{ $content->color_code }}</td>
                                     <td>
                                         @if($content->status == 1)
                                             <span class="badge badge-success">Active</span>

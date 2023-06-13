@@ -39,6 +39,9 @@
     @elseif($field["type"] === "password")
         {{ Form::password($field["name"], array_merge(["class" => "form-control"], $field["extra"] ?? [])) }}
 
+    @elseif($field["type"] === "color")
+        {{ Form::color($field["name"], null, array_merge(["class" => "form-control"], $field["extra"] ?? [])) }}
+
     @elseif($field["type"] === "textarea")
         {{ Form::textarea($field["name"], null, array_merge(["class" => "form-control"], $field["extra"] ?? [])) }}
 

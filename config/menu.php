@@ -31,6 +31,51 @@ return [
                             ]
                         ]
                     ],
+                    "Colors" => [
+                        "scope" => ["admin.products.color.index"],
+                        "links" => [
+                            [
+                                "title" => "List",
+                                "route" => "admin.products.color.index",
+                                "scope" => "admin.products.color.index"
+                            ],
+                            [
+                                "title" => "Add",
+                                "route" => "admin.products.color.create",
+                                "scope" => "admin.products.color.create"
+                            ]
+                        ]
+                    ],
+                    "Size" => [
+                        "scope" => ["admin.products.size.index"],
+                        "links" => [
+                            [
+                                "title" => "List",
+                                "route" => "admin.products.size.index",
+                                "scope" => "admin.products.size.index"
+                            ],
+                            [
+                                "title" => "Add",
+                                "route" => "admin.products.size.create",
+                                "scope" => "admin.products.size.create"
+                            ]
+                        ]
+                    ],
+                    "Brand" => [
+                        "scope" => ["admin.products.brand.index"],
+                        "links" => [
+                            [
+                                "title" => "List",
+                                "route" => "admin.products.brand.index",
+                                "scope" => "admin.products.brand.index"
+                            ],
+                            [
+                                "title" => "Add",
+                                "route" => "admin.products.brand.create",
+                                "scope" => "admin.products.brand.create"
+                            ]
+                        ]
+                    ],
                     
                 ],
             ],

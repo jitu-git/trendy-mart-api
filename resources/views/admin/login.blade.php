@@ -46,7 +46,7 @@
                             <h3 class="kt-login__title">Sign In To Admin</h3>
                         </div>
                         <x-alert/>
-                        {!! Form::open(['url' => 'admin-login', "class" => "kt-form"]) !!}
+                        {!! Form::open(['url' => 'login', "class" => "kt-form"]) !!}
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
                             </div>

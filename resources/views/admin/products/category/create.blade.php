@@ -62,12 +62,3 @@
         </div>
     </div>
 @endsection
-
-@section("scripts")
-    @include("partial.admin.js", ["page" => "bootstrap-select"])
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#district_id").selectpicker();
-        });
-    </script>
-@endsection

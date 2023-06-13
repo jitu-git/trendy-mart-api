@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +15,12 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): JsonResponse
+    public function store(LoginRequest $request): JsonResponse | RedirectResponse
     {
         $request->authenticate();
-        if($request->get("from" === 'admin')) {
+        if($request->get("from") === 'admin') {
             $request->session()->regenerate();
-            return redirect('admin.dashboard');
+            return redirect()->route('admin.dashboard');
 
         }
         $request->user()->tokens()->delete();
