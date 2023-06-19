@@ -116,18 +116,6 @@ if(!function_exists("role_list" )){
 }
 
 
-if(!function_exists("short_code_list" )){
-
-    /**
-     * get the array listing of short codes
-     *
-     * @return mixed
-     */
-    function short_code_list() {
-        return \App\Model\Shortcode::shortCodeList();
-    }
-}
-
 
 if(!function_exists("is_route_for_permission")){
 
@@ -137,46 +125,6 @@ if(!function_exists("is_route_for_permission")){
     }
 }
 
-
-if(!function_exists("short_code_replace")){
-
-    /**
-     * @param $content
-     * @return mixed
-     * @throws Throwable
-     */
-    function short_code_replace($content, $page_id){
-        $code = new \App\Extra\ShortCode\ShortCodeFactory($content, $page_id);
-        return $code->replace();
-    }
-
-}
-
-
-if(!function_exists("_href")){
-
-    /**
-     * @param \App\Model\Menu $menu
-     * @return string
-     */
-    function _href( $menu) : string {
-        if(!isset($menu->link_type)){
-            return "#";
-        }
-        switch ($menu->link_type ){
-            case 1:
-                return $menu->link;
-                break;
-            case 2:
-                $page = \App\Model\Page::find($menu->page_id);
-                return url($page->slug);
-                break;
-
-            default:
-                return "#";
-        }
-    }
-}
 
 
 if(!function_exists("create_list")){
@@ -193,27 +141,22 @@ if(!function_exists("create_list")){
 
 
 
-if(!function_exists("get_settings")){
-
-    function get_settings($setting_name = ""){
-        return \App\Model\Configuration::getSettings($setting_name);
-    }
-}
-
-if(!function_exists("get_all_short_code")){
-
-    function get_all_short_code() {
-        return array_merge(array_keys(config("shortcode")), short_code_list());
-    }
-
-}
-
-if(!function_exists("district_list" )){
+if(!function_exists("color_list" )){
 
     /**
      * @return mixed
      */
-    function district_list() {
-        return \App\Model\District::DistrictList();
+    function color_list() {
+        return \App\Models\Color::getColorList();
+    }
+}
+
+if(!function_exists("size_list" )){
+
+    /**
+     * @return mixed
+     */
+    function size_list() {
+        return \App\Models\Size::getSizeList();
     }
 }

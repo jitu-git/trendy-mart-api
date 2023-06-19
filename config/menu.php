@@ -76,6 +76,21 @@ return [
                             ]
                         ]
                     ],
+                    "Product" => [
+                        "scope" => ["admin.products.product.index"],
+                        "links" => [
+                            [
+                                "title" => "List",
+                                "route" => "admin.products.product.index",
+                                "scope" => "admin.products.product.index"
+                            ],
+                            [
+                                "title" => "Add",
+                                "route" => "admin.products.product.create",
+                                "scope" => "admin.products.product.create"
+                            ]
+                        ]
+                    ],
                     
                 ],
             ],

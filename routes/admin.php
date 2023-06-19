@@ -45,6 +45,7 @@ Route::prefix('products')->middleware('auth')->namespace('Products')->name('prod
         'color'     => 'ColorController',
         'size'     => 'SizeController',
         'brand'     => 'BrandController',
+        'product'     => 'ProductController',
     ];
     #Route::get('/', 'IndexController@index')->name('index');
     

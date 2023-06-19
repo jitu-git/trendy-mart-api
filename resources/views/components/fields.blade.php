@@ -47,7 +47,7 @@
 
 
     @elseif($field["type"] === "file")
-        {{ Form::file($field["name"], ["class" => "custom-file-input",  "accept"=>"image/*"]) }}
+        {{ Form::file($field["name"], array_merge(["class" => "custom-file-input",  "accept"=>"image/*"], $field["extra"] ?? [])) }}
         <label class="custom-file-label" for="customFile" style="text-align:left">Choose file</label>
 
         @if(!empty($class->data) && $class->data->{$field["name"]})

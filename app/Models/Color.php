@@ -9,4 +9,8 @@ class Color extends AppModel
 {
     protected $fillable = ['color_name', 'color_code', 'status'];
 
+    public static function getColorList($where = []) {
+        return self::where("status", 1)->orderBy('color_name')->pluck( "color_name", "id")->toArray();
+    }
+
 }
