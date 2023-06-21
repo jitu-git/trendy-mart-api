@@ -7,6 +7,8 @@ class Product extends AppModel
 {
     protected $fillable = ['title', 'description', 'category_id', 'price', 'offer_price', 'status'];
 
+    public $appends = ['rating'];
+
     public function category() {
         return $this->belongsTo(Category::class)->select('id', 'name');
     }
@@ -29,6 +31,15 @@ class Product extends AppModel
 
     public function isMyFav() {
         return $this->hasOne(Favourite::class)->where('user_id', get_user_info('id'));
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class)->with('images');
+    }
+
+    public function getRatingAttribute() 
+    {
+        return $this->reviews->average('rating');
     }
 
     public function storeSize($data) {

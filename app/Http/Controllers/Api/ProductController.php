@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Favourite;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -68,7 +69,7 @@ class ProductController extends Controller {
   }
 
   public function productDetails(Product $product) {
-    $product->load('category', 'colors', 'sizes', 'images', 'isMyFav');
+    $product->load('category', 'colors', 'sizes', 'images', 'isMyFav', 'reviews');
     return response()->json([
       'status' => true,
       'message' => 'Prodcut fetch successfully',
@@ -101,4 +102,43 @@ class ProductController extends Controller {
       ]);
     }
   }
+
+  public function submitReview(Request $request, Product $product) {
+    $request->validate(Review::$rules);
+    $data = $request->all();
+    $userId = get_user_info('id');
+    $data['user_id'] = $userId ;
+    $checkAlready = $product->reviews()->where('user_id', $userId)->count();
+    if($checkAlready > 0) {
+      return response()->json([
+        'status' => false,
+        'message' => 'You have already submitted the review for this product',
+      ]);
+    }
+    $review = $product->reviews()->create($data);
+
+    if($request->hasFile('images')) {
+      $images = [];
+      $files = request()->file('images');
+      foreach($files as $file) {
+        $image = _upload($file,  "product/{$product->id}/reviews");
+        $images[] = ['image' => $image];
+      }
+      $review->images()->createMany($images);
+    }
+
+    if($review) {
+      return response()->json([
+        'status' => true,
+        'message' => 'Review submit successfully',
+      ]);
+    } else {
+      return response()->json([
+        'status' => false,
+        'message' => 'Something went wrong',
+      ]);
+    }
+
+  }
+
 }
