@@ -66,4 +66,13 @@ class ProductController extends Controller {
     ]);
   }
 
+  public function productDetails(Product $product) {
+    $product->load('category', 'colors', 'sizes', 'images');
+    return response()->json([
+      'status' => true,
+      'message' => 'Prodcut fetch successfully',
+      'data' => $product
+    ]);
+  }
+
 }
