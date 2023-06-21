@@ -31,6 +31,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('product/favourite/{product}', [ProductController::class, 'handleFavourite']);
     Route::post('product/review/{product}', [ProductController::class, 'submitReview']);
+
+    Route::get('products/my-favourite', [ProductController::class, 'myFavourites']);
     
     
 });

@@ -29,6 +29,10 @@ class Product extends AppModel
         return $this->belongsToMany(User::class, 'favourites', 'product_id', 'user_id');
     }
 
+    public function myFavourites() {
+        return $this->belongsToMany(User::class, 'favourites', 'product_id', 'user_id')->where('user_id', get_user_info('id'));
+    }
+
     public function isMyFav() {
         return $this->hasOne(Favourite::class)->where('user_id', get_user_info('id'));
     }

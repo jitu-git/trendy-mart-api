@@ -141,4 +141,12 @@ class ProductController extends Controller {
 
   }
 
+  public function myFavourites() {
+    $products = Product::with('category', 'colors', 'sizes', 'images', 'reviews')->whereHas('myFavourites')->paginate(10);
+    return response()->json([
+      'status' => true,
+      'message' => 'Prodcut fetch successfully',
+      'data' => $products
+    ]);
+  }
 }
