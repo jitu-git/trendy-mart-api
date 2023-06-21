@@ -23,6 +23,14 @@ class Product extends AppModel
         return $this->hasMany(ProductImage::class)->select('id', 'product_id', 'image');
     }
 
+    public function favouritedBy() {
+        return $this->belongsToMany(User::class, 'favourites', 'product_id', 'user_id');
+    }
+
+    public function isMyFav() {
+        return $this->hasOne(Favourite::class)->where('user_id', get_user_info('id'));
+    }
+
     public function storeSize($data) {
         $data = collect($data)->map(function ($size) {
             return new ProductSize(['size_id' => $size]);
