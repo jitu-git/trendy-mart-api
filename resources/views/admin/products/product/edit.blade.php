@@ -20,7 +20,9 @@
     @include("partial.admin.js", ["page" => "bootstrap-select"])
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#district_id").selectpicker();
+            $("#category_id").selectpicker();
+            $("#sizes").selectpicker();
+            $("#colors").selectpicker();
         });
     </script>
 @endsection

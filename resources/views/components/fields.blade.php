@@ -49,13 +49,21 @@
     @elseif($field["type"] === "file")
         {{ Form::file($field["name"], array_merge(["class" => "custom-file-input",  "accept"=>"image/*"], $field["extra"] ?? [])) }}
         <label class="custom-file-label" for="customFile" style="text-align:left">Choose file</label>
-
         @if(!empty($class->data) && $class->data->{$field["name"]})
             <div class="form-group" style="margin-top: 20px;">
+                @if(is_array($class->data->{$field["name"]})) 
+                @foreach ($class->data->{$field["name"]} as $image)
+                    {{ Form::hidden("old_{$field["name"]}", $image->{$field["name"]}) }}
+                    <a href="{{ $class->data->{$field["name"]} }}" class="html5lightbox" >
+                        <img src="{{ $image->{$field["name"]} }}" class="img-thumbnail" style="max-width: 60%;max-height: 60%;display: block;">
+                    </a>
+                @endforeach
+                @else
                 {{ Form::hidden("old_{$field["name"]}",$class->data->{$field["name"]}) }}
                 <a href="{{ $class->data->{$field["name"]} }}" class="html5lightbox" >
                     <img src="{{ $class->data->{$field["name"]} }}" class="img-thumbnail" style="max-width: 60%;max-height: 60%;display: block;">
                 </a>
+                @endif
             </div>
         @endif
     @endif

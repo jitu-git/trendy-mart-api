@@ -84,7 +84,6 @@ class ProductController extends Controller
      */
     public function store(Request $request) {
         $request->validate(ProductForm::rules());
-        #dd($request->all());
         $data = $request->all();
         $store = Product::create($data);
         $store->storeSize($request->sizes);
@@ -92,8 +91,9 @@ class ProductController extends Controller
         $images = [];
         if($request->hasFile('images')) {
             $files = request()->file('images');
-            foreach($files as $file)
-            $images[] = _upload($file,  "product/{$store->id}");
+            foreach($files as $file) {
+                $images[] = _upload($file,  "product/{$store->id}");
+            }
         }
         $store->storeImages($images);
         if($store) {
@@ -114,6 +114,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product) {
         $this->_data["breadcrumb"]["Update"] =  "javascript:void(0)";
+        $product->load('images');
         $this->_data["data"] = $product;
         $this->_data["form"] = new ProductForm($product);
         $this->_data["categories"] = menu_parent_list();
